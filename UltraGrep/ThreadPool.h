@@ -9,27 +9,25 @@
 #include <future>
 #include <atomic>
 using namespace std;
-#include <Windows.h>
 
-#include "IWorker.h"
-#include "GrepResults.h"
+#include "IThreadPool.h"
 
-class ThreadPool {
+
+//ThreadPool - Concrete Instance of the IThreadPool interface. 
+//Uses the C++11 <thread> library to create and manage a ThreadPool
+//Date - Oct 25, 2015
+class ThreadPool : public IThreadPool {
 public:
-	//Typedefs
-	using worker_type = unique_ptr<IWorker>;
 
-	//Data Members
-	unsigned int				numOfThreads;
-	vector<thread>				threadVector;
+	//WorkerQueue - Holds the jobs until the thread is ready to handle them!
 	queue<worker_type>			workerQueue;
 
-	//Lock Items
+	//Queue Lock Items - Mutex/Notify threads + "flag" variable to tell threads when they can stop running
 	mutex						queueLock;
 	condition_variable			queueNotify;
 	atomic<bool>				threadPoolStopped;
 
-	//Results Mutex
+	//Results Mutex/
 	mutex						resultsLock;
 
 	//Results/Futures
@@ -37,22 +35,26 @@ public:
 	vector<GrepResults>			threadResults;
 
 public:
-	//Constructor 0-Arg - Defaults Thread amount to number of processors on machine
+	//Constructor 0-Arg - Defaults Thread amount to number of processors on machine - uses "thread::hardware_processes()"
 	ThreadPool();
 
-	//Constructor - 1-arg - Allows us to specify the pool size
+	//Constructor - 1-arg - Allows user to specify the size they want their threadpool to start at
 	ThreadPool(size_t const& poolSize); 
 
 	//Object Destructor - Ensures we have ended all the threads, in case we didn't explicitly tell the queue to stop
 	~ThreadPool();
 
-	void EnqueueWorker(worker_type& worker);
-	void AssignWorker();
+	//IThreadPool - Implemented virtual functions from the base class
+	void EnqueueWorker(worker_type& worker) override;
+	vector<GrepResults> getResults() override;
 
-	//Temporarily Void - Need to create a Class to hold the results
-	void StopPool();
 
-	vector<GrepResults> getResults();
+	//DoThreadTasks
+	//Purpose - Member Function that gets attached to each thread running Async.
+	//		  - Will attempt to pull from worker queue if not empty() until stop is called
+	//Returns - Nothing. Results are passed during the function through a lock
+	//Accepts - Nothing. Everything needed for the task exists within the function + attached threadpool
+	void DoThreadTasks();
 
 };
 

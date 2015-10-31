@@ -1,5 +1,3 @@
-#include <iostream>
-using namespace std;
 #include "DirectoryWorker.h"
 
 GrepResults DirectoryWorker::doWork()
@@ -11,18 +9,19 @@ GrepResults DirectoryWorker::doWork()
 		path searchedFile = bdi->path();
 		if (is_directory(searchedFile)) {
 			//Generate new "directory worker" - add it to the queue
-			workerFactory.GenerateWorker(ThreadType::DIRECTORY, searchedFile);
+			workerFactory.GenerateWorker(WorkerType::DIRECTORY, searchedFile);
 		}
 		else if (is_regular_file(searchedFile)) {
 			//Need to confirm that the "extension" of the file we are searching matches on in our list
 			if (isValidExtension(searchedFile.extension().generic_string())) {
 				//Generate new "FileWorker" - add it to the queue
 				//Only want to track files we're actually scanning
-				workerFactory.GenerateWorker(ThreadType::REGULARFILE, searchedFile);
+				workerFactory.GenerateWorker(WorkerType::REGULARFILE, searchedFile);
 			}
 		}
 	}
 
+	//Currently - Return empty object as we don't care what this returns
 	return GrepResults("");
 }
 

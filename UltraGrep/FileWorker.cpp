@@ -1,11 +1,20 @@
 #include <fstream>
 #include <iostream>
+#include <string>
+using namespace std;
 #include "FileWorker.h"
 
 GrepResults FileWorker::doWork() {
+	GrepResults results(filePath.generic_string());
+
 	//First - need to open the file
 	ifstream fileToParse(filePath);
-	GrepResults results(filePath.generic_string());
+
+	if (fileToParse.fail()) {
+		cout << "File: " << filePath.generic_string() << " was deleted during execution! Abandoning parse!" << endl;
+		return results;
+	}
+
 	if (fileVariables.isVerbose()) {
 		cout << "Grepping: " << filePath.generic_string() << endl;
 	}

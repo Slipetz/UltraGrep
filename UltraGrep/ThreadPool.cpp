@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#include <Windows.h>
 #include "ThreadPool.h"
 
 void ThreadPool::EnqueueWorker(worker_type& worker)
@@ -10,7 +11,7 @@ void ThreadPool::EnqueueWorker(worker_type& worker)
 }
 
 
-void ThreadPool::AssignWorker()
+void ThreadPool::DoThreadTasks()
 {
 	for (;;) {
 		worker_type worker;
@@ -38,8 +39,10 @@ void ThreadPool::AssignWorker()
 	}
 }
 
-void ThreadPool::StopPool()
+
+vector<GrepResults> ThreadPool::getResults()
 {
+	if (!workerQueue.empty()) { Sleep(50); }
 	threadPoolStopped = true;
 	queueNotify.notify_all();
 	for (auto& ft : futuresThread) {
@@ -47,10 +50,7 @@ void ThreadPool::StopPool()
 	}
 	//Kill the futuresThread - once they've been used, they're done!
 	futuresThread.clear();
-}
 
-vector<GrepResults> ThreadPool::getResults()
-{
 	{
 		lock_guard<mutex> resultsGuard(resultsLock);
 		return threadResults;
@@ -59,16 +59,17 @@ vector<GrepResults> ThreadPool::getResults()
 
 ThreadPool::ThreadPool() : threadPoolStopped(false)
 {
-	numOfThreads = thread::hardware_concurrency();
+	cout << "Using C++11 ThreadPool..." << endl;
+	size_t numOfThreads = thread::hardware_concurrency();
 	for (size_t i = 0; i < numOfThreads; ++i) {
-		future<void> tFuture = async(launch::async, &ThreadPool::AssignWorker, this);
+		future<void> tFuture = async(launch::async, &ThreadPool::DoThreadTasks, this);
 		futuresThread.emplace_back(std::move(tFuture));
 	}
 }
 
 ThreadPool::ThreadPool(size_t const & poolSize) : threadPoolStopped(false) {
 	for (size_t i = 0; i < poolSize; ++i) {
-		future<void> tFuture = async(launch::async, &ThreadPool::AssignWorker, this);
+		future<void> tFuture = async(launch::async, &ThreadPool::DoThreadTasks, this);
 		futuresThread.emplace_back(std::move(tFuture));
 	}
 }

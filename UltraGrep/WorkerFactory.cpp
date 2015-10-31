@@ -4,14 +4,14 @@
 #include "DirectoryWorker.h"
 #include "FileWorker.h"
 
-void WorkerFactory::GenerateWorker(ThreadType const & fileType, path const& file)
+void WorkerFactory::GenerateWorker(WorkerType const & fileType, path const& file)
 {
 	switch (fileType) {
-	case ThreadType::DIRECTORY:
-		threadPool.EnqueueWorker(std::move(unique_ptr<IWorker>(new DirectoryWorker(file, blueprint, *this))));
+	case WorkerType::DIRECTORY:
+		threadPool->EnqueueWorker(std::move(unique_ptr<IWorker>(new DirectoryWorker(file, blueprint, *this))));
 		break;
-	case ThreadType::REGULARFILE:
-		threadPool.EnqueueWorker(std::move(unique_ptr<IWorker>(new FileWorker(file, blueprint))));
+	case WorkerType::REGULARFILE:
+		threadPool->EnqueueWorker(std::move(unique_ptr<IWorker>(new FileWorker(file, blueprint))));
 		break;
 	}
 }

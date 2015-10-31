@@ -148,17 +148,21 @@
     <ClInclude Include="FileVariables.h" />
     <ClInclude Include="FileWorker.h" />
     <ClInclude Include="GrepResults.h" />
+    <ClInclude Include="IThreadPool.h" />
     <ClInclude Include="IWorker.h" />
     <ClInclude Include="ThreadPool.h" />
     <ClInclude Include="ValidationPackage.h" />
+    <ClInclude Include="W32CSLock.h" />
+    <ClInclude Include="W32ThreadPool.h" />
     <ClInclude Include="WorkerFactory.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommandArgumentValidator.cpp" />
     <ClCompile Include="DirectoryWorker.cpp" />
     <ClCompile Include="FileWorker.cpp" />
-    <ClCompile Include="maintest.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="ThreadPool.cpp" />
+    <ClCompile Include="W32ThreadPool.cpp" />
     <ClCompile Include="WorkerFactory.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

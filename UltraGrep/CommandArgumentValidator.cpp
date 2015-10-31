@@ -1,10 +1,14 @@
+#include <iostream>
+using namespace std;
 #include "CommandArgumentValidator.h"
 
-CommandArgumentValidator::CommandArgumentValidator(int argc, char * argv[]) : properUsage("UltraGrep [-v] File/Directory Regex [file extensions]\n"), anyInvalidArgument(false)
+CommandArgumentValidator::CommandArgumentValidator(int argc, char * argv[]) : anyInvalidArgument(false)
 {
+	string programUsage = "UltraGrep [-v] File/Directory Regex [file extensions]\n";
+	//Program must have at least 3 parameters (Program + Path + Regex) and cannot have more than 5 (Verbose + Extensions added)
 	if (argc < 3 || argc > 5) {
 		cerr << "Incorrect number of parameters. Proper usage:\n";
-		cerr << properUsage;
+		cerr << programUsage;
 		anyInvalidArgument = true;
 		return;
 	}
@@ -68,17 +72,17 @@ bool CommandArgumentValidator::IsInvalidPath(string arg)
 	path filePath(arg);
 	if (!exists(filePath)) {
 		cerr << "File: " << arg << " doesn't exist!" << endl;
-		cerr << "Program Usage: " << properUsage;
+		cerr << "Program Usage: " << "UltraGrep [-v] File/Directory Regex [file extensions]\n";
 		return true;
 	}
 	else 
 	{
 		valPackage.initialFile = filePath;
 		if (is_directory(filePath)) {
-			valPackage.initialThreadType = ThreadType::DIRECTORY;
+			valPackage.initialThreadType = WorkerType::DIRECTORY;
 			return false;
 		} 
-		valPackage.initialThreadType = ThreadType::REGULARFILE;
+		valPackage.initialThreadType = WorkerType::REGULARFILE;
 		return false;
 	}
 }
@@ -96,7 +100,8 @@ vector<string> CommandArgumentValidator::ParseExtensions(string extString)
 	size_t subStart = 0;
 	vector<string> extensions;
 	while (subStart < extString.length()) {
-		int length = extString.find_first_of('.', subStart + 1) - subStart;
+		//Increment by one, so we don't retrieve the second period when parsing the string
+		size_t length = extString.find_first_of('.', subStart + 1) - subStart;
 		if (length == string::npos) {
 			extensions.emplace_back(extString.substr(subStart, extString.length()));
 			break; //The final parsed string
