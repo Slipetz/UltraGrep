@@ -16,12 +16,6 @@
     <Filter Include="ThreadPools\IThreadPools">
       <UniqueIdentifier>{253d1b5a-6059-449b-9d82-9602f55105bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThreadPools\Win32ThreadPool">
-      <UniqueIdentifier>{4790cf40-5c39-41cc-9440-ef0a678376da}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ThreadPools\Win32 OOP Locks">
-      <UniqueIdentifier>{a616760e-3aa6-4940-a808-4bd157ae099e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Workers">
       <UniqueIdentifier>{11d90d8f-d685-40fc-86fc-700041a13719}</UniqueIdentifier>
     </Filter>
@@ -63,14 +57,8 @@
     <ClInclude Include="GrepResults.h">
       <Filter>Results</Filter>
     </ClInclude>
-    <ClInclude Include="W32ThreadPool.h">
-      <Filter>ThreadPools\Win32ThreadPool</Filter>
-    </ClInclude>
     <ClInclude Include="IThreadPool.h">
       <Filter>ThreadPools\IThreadPools</Filter>
-    </ClInclude>
-    <ClInclude Include="W32CSLock.h">
-      <Filter>ThreadPools\Win32 OOP Locks</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -88,9 +76,6 @@
     </ClCompile>
     <ClCompile Include="CommandArgumentValidator.cpp">
       <Filter>Helpers</Filter>
-    </ClCompile>
-    <ClCompile Include="W32ThreadPool.cpp">
-      <Filter>ThreadPools\Win32ThreadPool</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp" />
   </ItemGroup>

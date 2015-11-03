@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="ThreadPools">
+      <UniqueIdentifier>{fa756380-c1ab-436f-9acb-d2512a2c65e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadPools\Interface">
+      <UniqueIdentifier>{003f2bdd-6ba5-4ab7-a396-a94de1b0204a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadPools\ThreadPool">
+      <UniqueIdentifier>{9bb7cbca-02f9-4bf6-b23d-9ffe6d0cc678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThreadPools\Locks">
+      <UniqueIdentifier>{42d267d8-9d75-4fd0-b7da-1d4840e20c0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Helpers">
+      <UniqueIdentifier>{560dc72c-ac2b-41e4-a9fe-b64f9404a816}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Results">
+      <UniqueIdentifier>{5968e0a1-6e78-45c4-b7d0-c0954f9171ad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Workers">
+      <UniqueIdentifier>{4153ceda-4450-4338-b3a7-256a248701ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Workers\WorkerClasses">
+      <UniqueIdentifier>{d4266511-8e8c-4a50-8f72-6cd96761b5cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Workers\WorkerFactory">
+      <UniqueIdentifier>{ba48cae1-22c2-4e1b-b725-81afdad1a174}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="IThreadPool.h">
+      <Filter>ThreadPools\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="W32ThreadPool.h">
+      <Filter>ThreadPools\ThreadPool</Filter>
+    </ClInclude>
+    <ClInclude Include="W32CSLock.h">
+      <Filter>ThreadPools\Locks</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandArgumentValidator.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileEnums.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="FileVariables.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="ValidationPackage.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="GrepResults.h">
+      <Filter>Results</Filter>
+    </ClInclude>
+    <ClInclude Include="WorkerFactory.h">
+      <Filter>Workers\WorkerFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="DirectoryWorker.h">
+      <Filter>Workers\WorkerClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWorker.h">
+      <Filter>Workers\WorkerClasses</Filter>
+    </ClInclude>
+    <ClInclude Include="IWorker.h">
+      <Filter>Workers\WorkerClasses</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="W32ThreadPool.cpp">
+      <Filter>ThreadPools\ThreadPool</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandArgumentValidator.cpp">
+      <Filter>Helpers</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkerFactory.cpp">
+      <Filter>Workers\WorkerFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="DirectoryWorker.cpp">
+      <Filter>Workers\WorkerClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="FileWorker.cpp">
+      <Filter>Workers\WorkerClasses</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

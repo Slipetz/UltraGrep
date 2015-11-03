@@ -18,12 +18,33 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CommandArgumentValidator.h" />
+    <ClInclude Include="DirectoryWorker.h" />
+    <ClInclude Include="FileEnums.h" />
+    <ClInclude Include="FileVariables.h" />
+    <ClInclude Include="FileWorker.h" />
+    <ClInclude Include="GrepResults.h" />
+    <ClInclude Include="IThreadPool.h" />
+    <ClInclude Include="IWorker.h" />
+    <ClInclude Include="ValidationPackage.h" />
+    <ClInclude Include="W32CSLock.h" />
+    <ClInclude Include="W32ThreadPool.h" />
+    <ClInclude Include="WorkerFactory.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CommandArgumentValidator.cpp" />
+    <ClCompile Include="DirectoryWorker.cpp" />
+    <ClCompile Include="FileWorker.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="W32ThreadPool.cpp" />
+    <ClCompile Include="WorkerFactory.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{A1D7A3DC-0AA7-43E6-AF7F-9B9C569D96D2}</ProjectGuid>
+    <ProjectGuid>{47A038C3-3106-4E0C-980F-E11CAC38D74F}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>UltraGrep</RootNamespace>
+    <RootNamespace>UltraGrepWin32</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
-    <ProjectName>UltraGrep</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -142,27 +163,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="CommandArgumentValidator.h" />
-    <ClInclude Include="DirectoryWorker.h" />
-    <ClInclude Include="FileEnums.h" />
-    <ClInclude Include="FileVariables.h" />
-    <ClInclude Include="FileWorker.h" />
-    <ClInclude Include="GrepResults.h" />
-    <ClInclude Include="IThreadPool.h" />
-    <ClInclude Include="IWorker.h" />
-    <ClInclude Include="ThreadPool.h" />
-    <ClInclude Include="ValidationPackage.h" />
-    <ClInclude Include="WorkerFactory.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="CommandArgumentValidator.cpp" />
-    <ClCompile Include="DirectoryWorker.cpp" />
-    <ClCompile Include="FileWorker.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ThreadPool.cpp" />
-    <ClCompile Include="WorkerFactory.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -3,9 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-#include <Windows.h>
-
-#include "ThreadPool.h"
+#include "W32ThreadPool.h"
 #include "WorkerFactory.h"
 #include "CommandArgumentValidator.h"
 
@@ -39,11 +37,11 @@ int main(int argc, char* argv[]) {
 
 	ValidationPackage blueprints = validator.getValidationPackage();
 	vector<GrepResults> results;
-	LARGE_INTEGER tp11Start, tp11Stop;
-	QueryPerformanceCounter(&tp11Start);
+	LARGE_INTEGER w32tpstart, w32tpstop;
+	QueryPerformanceCounter(&w32tpstart);
 
 	{
-		shared_ptr<IThreadPool> threadPool(new ThreadPool());
+		shared_ptr<IThreadPool> threadPool(new W32ThreadPool());
 		WorkerFactory factory(threadPool.get(), blueprints.fileVariables);
 
 		//Start up the thread with what we passed in!
@@ -52,9 +50,11 @@ int main(int argc, char* argv[]) {
 	}
 
 	sort(results.begin(), results.end());
-	QueryPerformanceCounter(&tp11Stop);
-	double tp11Elapsed = (tp11Stop.QuadPart - tp11Start.QuadPart) / double(frequency.QuadPart);
-	cout << "C++11 Completed and sorted in " << tp11Elapsed << endl;
+	QueryPerformanceCounter(&w32tpstop);
+	double w32ElapsedTime = (w32tpstop.QuadPart - w32tpstart.QuadPart) / double(frequency.QuadPart);
+	cout << "W32 Completed and sorted in " << w32ElapsedTime << endl;
+
+
 	//OutputReport(results);
 }
 
