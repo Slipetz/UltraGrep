@@ -4,6 +4,7 @@
 using namespace std::tr2::sys;
 
 #include "IThreadPool.h"
+#include "C11Logger.h"
 #include "FileVariables.h"
 #include "FileEnums.h"
 
@@ -15,6 +16,10 @@ public:
 
 	//Blueprint - FileVariables object that contains all of the necessary data for the IWorker objects to perform their tasks
 	FileVariables		blueprint;
+	
+	//WorkerReporter - Provides locked output for the FileDirectory verbose logging. Needs to be in an upper class so all threads see the same logger
+	C11Logger			workerReporter;
+
 
 public:
 	//2 Arg Constructor - Creates the object with the ThreadPool pointer and the "blueprint" file that will be passed to each object created
@@ -26,7 +31,6 @@ public:
 	//Accepts: WorkerType - Type of object that the factory needs to create. Path - What file/directory will be parsed/searched by the Worker
 	//Returns: Nothing. The IWorker object is passed directly into the ThreadPool
 	void GenerateWorker(WorkerType const& fileType, path const& file);
-
 };
 
 #endif

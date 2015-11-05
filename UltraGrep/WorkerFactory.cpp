@@ -11,7 +11,7 @@ void WorkerFactory::GenerateWorker(WorkerType const & fileType, path const& file
 		threadPool->EnqueueWorker(std::move(unique_ptr<IWorker>(new DirectoryWorker(file, blueprint, *this))));
 		break;
 	case WorkerType::REGULARFILE:
-		threadPool->EnqueueWorker(std::move(unique_ptr<IWorker>(new FileWorker(file, blueprint))));
+		threadPool->EnqueueWorker(std::move(unique_ptr<IWorker>(new FileWorker(file, blueprint, workerReporter))));
 		break;
 	}
 }

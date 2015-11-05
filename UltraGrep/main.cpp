@@ -28,8 +28,6 @@ void OutputReport(vector<GrepResults> const& results) {
 
 int main(int argc, char* argv[]) {
 	cout.imbue(locale(""));
-	LARGE_INTEGER frequency;
-	QueryPerformanceFrequency(&frequency);
 
 	CommandArgumentValidator validator(argc, argv);
 	if (validator.HasValidationErrors()) {
@@ -39,8 +37,6 @@ int main(int argc, char* argv[]) {
 
 	ValidationPackage blueprints = validator.getValidationPackage();
 	vector<GrepResults> results;
-	LARGE_INTEGER tp11Start, tp11Stop;
-	QueryPerformanceCounter(&tp11Start);
 
 	{
 		shared_ptr<IThreadPool> threadPool(new ThreadPool());
@@ -52,10 +48,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	sort(results.begin(), results.end());
-	QueryPerformanceCounter(&tp11Stop);
-	double tp11Elapsed = (tp11Stop.QuadPart - tp11Start.QuadPart) / double(frequency.QuadPart);
-	cout << "C++11 Completed and sorted in " << tp11Elapsed << endl;
-	//OutputReport(results);
+	OutputReport(results);
 }
 
 

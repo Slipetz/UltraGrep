@@ -25,10 +25,12 @@
     <ClInclude Include="FileVariables.h" />
     <ClInclude Include="FileWorker.h" />
     <ClInclude Include="GrepResults.h" />
+    <ClInclude Include="ILogger.h" />
     <ClInclude Include="IThreadPool.h" />
     <ClInclude Include="IWorker.h" />
     <ClInclude Include="ValidationPackage.h" />
     <ClInclude Include="W32CSLock.h" />
+    <ClInclude Include="W32Logger.h" />
     <ClInclude Include="W32ThreadPool.h" />
     <ClInclude Include="WorkerFactory.h" />
   </ItemGroup>
@@ -37,6 +39,7 @@
     <ClCompile Include="DirectoryWorker.cpp" />
     <ClCompile Include="FileWorker.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="W32Logger.cpp" />
     <ClCompile Include="W32ThreadPool.cpp" />
     <ClCompile Include="WorkerFactory.cpp" />
   </ItemGroup>

@@ -26,9 +26,7 @@ void OutputReport(vector<GrepResults> const& results) {
 
 int main(int argc, char* argv[]) {
 	cout.imbue(locale(""));
-	LARGE_INTEGER frequency;
-	QueryPerformanceFrequency(&frequency);
-
+	
 	CommandArgumentValidator validator(argc, argv);
 	if (validator.HasValidationErrors()) {
 		//Error message already printed to cerr from validator
@@ -37,9 +35,7 @@ int main(int argc, char* argv[]) {
 
 	ValidationPackage blueprints = validator.getValidationPackage();
 	vector<GrepResults> results;
-	LARGE_INTEGER w32tpstart, w32tpstop;
-	QueryPerformanceCounter(&w32tpstart);
-
+	
 	{
 		shared_ptr<IThreadPool> threadPool(new W32ThreadPool());
 		WorkerFactory factory(threadPool.get(), blueprints.fileVariables);
@@ -50,12 +46,7 @@ int main(int argc, char* argv[]) {
 	}
 
 	sort(results.begin(), results.end());
-	QueryPerformanceCounter(&w32tpstop);
-	double w32ElapsedTime = (w32tpstop.QuadPart - w32tpstart.QuadPart) / double(frequency.QuadPart);
-	cout << "W32 Completed and sorted in " << w32ElapsedTime << endl;
-
-
-	//OutputReport(results);
+	OutputReport(results);
 }
 
 

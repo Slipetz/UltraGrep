@@ -28,6 +28,9 @@
     <Filter Include="Workers\WorkerFactory">
       <UniqueIdentifier>{ba48cae1-22c2-4e1b-b725-81afdad1a174}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Workers\Logger">
+      <UniqueIdentifier>{8cbdf87b-dd35-447e-83be-348f2c0eaa89}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="IThreadPool.h">
@@ -66,6 +69,12 @@
     <ClInclude Include="IWorker.h">
       <Filter>Workers\WorkerClasses</Filter>
     </ClInclude>
+    <ClInclude Include="ILogger.h">
+      <Filter>Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="W32Logger.h">
+      <Filter>Workers\Logger</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -83,6 +92,9 @@
     </ClCompile>
     <ClCompile Include="FileWorker.cpp">
       <Filter>Workers\WorkerClasses</Filter>
+    </ClCompile>
+    <ClCompile Include="W32Logger.cpp">
+      <Filter>Workers\Logger</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

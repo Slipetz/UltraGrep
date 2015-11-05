@@ -143,12 +143,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="C11Logger.h" />
     <ClInclude Include="CommandArgumentValidator.h" />
     <ClInclude Include="DirectoryWorker.h" />
     <ClInclude Include="FileEnums.h" />
     <ClInclude Include="FileVariables.h" />
     <ClInclude Include="FileWorker.h" />
     <ClInclude Include="GrepResults.h" />
+    <ClInclude Include="ILogger.h" />
     <ClInclude Include="IThreadPool.h" />
     <ClInclude Include="IWorker.h" />
     <ClInclude Include="ThreadPool.h" />
@@ -156,6 +158,7 @@
     <ClInclude Include="WorkerFactory.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="C11Logger.cpp" />
     <ClCompile Include="CommandArgumentValidator.cpp" />
     <ClCompile Include="DirectoryWorker.cpp" />
     <ClCompile Include="FileWorker.cpp" />

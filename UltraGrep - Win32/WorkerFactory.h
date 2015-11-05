@@ -6,6 +6,7 @@ using namespace std::tr2::sys;
 #include "IThreadPool.h"
 #include "FileVariables.h"
 #include "FileEnums.h"
+#include "W32Logger.h"
 
 //WorkerFactory - Class that generates the IWorker objects and passes them into the ThreadPool Queue
 class WorkerFactory {
@@ -15,6 +16,9 @@ public:
 
 	//Blueprint - FileVariables object that contains all of the necessary data for the IWorker objects to perform their tasks
 	FileVariables		blueprint;
+
+	//ReportingPipeline - Provides locked access for FileWorkers to output to if verbose has been turned on!
+	W32Logger			reportingPipeline;
 
 public:
 	//2 Arg Constructor - Creates the object with the ThreadPool pointer and the "blueprint" file that will be passed to each object created

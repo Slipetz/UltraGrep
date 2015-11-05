@@ -8,7 +8,9 @@ VOID CALLBACK PerformWork(PTP_CALLBACK_INSTANCE instance, void * context) {
 	UNREFERENCED_PARAMETER(instance);
 
 	W32ThreadPool& tPool = *(reinterpret_cast < W32ThreadPool* > (context));
-	W32ThreadPool::worker_type worker = std::move(tPool.GetNextJob());
+	W32ThreadPool::worker_type worker;
+	worker = std::move(tPool.GetNextJob());
+
 	if (worker != nullptr) {
 		GrepResults results = worker->doWork();
 		if (results.getTotalMatches() > 0) {
@@ -38,6 +40,7 @@ W32ThreadPool::W32ThreadPool()
 
 W32ThreadPool::W32ThreadPool(DWORD const& nThreads)
 {
+	cout << "Using W32 ThreadPool..." << endl;
 	InitializeThreadpoolEnvironment(&callbackEnvironment);
 	threadPool = CreateThreadpool(NULL);
 	SetThreadpoolThreadMaximum(threadPool, nThreads);
@@ -76,7 +79,7 @@ void W32ThreadPool::AddResult(GrepResults const& result)
 
 vector<GrepResults> W32ThreadPool::getResults()
 {
-	while (!workerQueue.empty()) { Sleep(50); }
+	while (!workerQueue.empty()) { Sleep(25); }
 	CloseThreadpoolCleanupGroupMembers(cleanupGroup, FALSE, NULL);
 	{
 		W32Lock resLock(resultsCS);

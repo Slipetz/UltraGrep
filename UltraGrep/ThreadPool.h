@@ -6,7 +6,6 @@
 #include <queue>
 #include <memory>
 #include <mutex>
-#include <future>
 #include <atomic>
 using namespace std;
 
@@ -27,13 +26,14 @@ public:
 	condition_variable			queueNotify;
 	atomic<bool>				threadPoolStopped;
 
-	//Results Mutex/
+	//Results Mutex
 	mutex						resultsLock;
 
 	//Results/Futures
-	vector<future<void>>		futuresThread;
+	vector<thread>				threadHolder;
 	vector<GrepResults>			threadResults;
 
+	static mutex				consoleLock;
 public:
 	//Constructor 0-Arg - Defaults Thread amount to number of processors on machine - uses "thread::hardware_processes()"
 	ThreadPool();
