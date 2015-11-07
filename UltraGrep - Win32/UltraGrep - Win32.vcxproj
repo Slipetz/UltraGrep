@@ -19,29 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommandArgumentValidator.h" />
     <ClInclude Include="DirectoryWorker.h" />
-    <ClInclude Include="FileEnums.h" />
-    <ClInclude Include="FileVariables.h" />
     <ClInclude Include="FileWorker.h" />
-    <ClInclude Include="GrepResults.h" />
-    <ClInclude Include="ILogger.h" />
-    <ClInclude Include="IThreadPool.h" />
-    <ClInclude Include="IWorker.h" />
-    <ClInclude Include="ValidationPackage.h" />
     <ClInclude Include="W32CSLock.h" />
     <ClInclude Include="W32Logger.h" />
     <ClInclude Include="W32ThreadPool.h" />
     <ClInclude Include="WorkerFactory.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CommandArgumentValidator.cpp" />
     <ClCompile Include="DirectoryWorker.cpp" />
     <ClCompile Include="FileWorker.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="W32Logger.cpp" />
-    <ClCompile Include="W32ThreadPool.cpp" />
     <ClCompile Include="WorkerFactory.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UGLib\UGLib.vcxproj">
+      <Project>{6972219c-1f8b-40a7-b505-af96ff3c340e}</Project>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{47A038C3-3106-4E0C-980F-E11CAC38D74F}</ProjectGuid>
@@ -113,6 +108,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../UGLib/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +137,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>../UGLib/</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -3,8 +3,8 @@
 #include <filesystem>
 using namespace std::tr2::sys;
 
-#include "IWorker.h"
-#include "FileVariables.h"
+#include "../UGLib/IWorker.h"
+#include "../UGLib/FileVariables.h"
 #include "WorkerFactory.h"
 
 //FileWorker - Worker Class that will scan a directory and create an IWorker object for every directory or every file

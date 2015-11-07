@@ -1,7 +1,6 @@
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <mutex>
 using namespace std;
 #include "FileWorker.h"
 
@@ -25,7 +24,7 @@ GrepResults FileWorker::doWork() {
 	while (getline(fileToParse, lineToParse)) {
 		if (regex_search(lineToParse, fileVariables.getRegexString())) {
 			if (fileVariables.isVerbose()) {
-				reportingPipe.LogOutput(cout, "Matched: [" + to_string(lineNumber) + "]: " + lineToParse);
+				reportingPipe.LogOutput(cout, "Matched: " + filePath.generic_string() + " : [" + to_string(lineNumber) + "]: " + lineToParse);
 			}
 			//Means we have a match. Attach it to the result object!
 			results.setMatch(lineNumber, lineToParse);

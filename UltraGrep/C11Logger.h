@@ -5,14 +5,12 @@
 #include <mutex>
 using namespace std;
 
-#include "ILogger.h"
+#include "../UGLib/ILogger.h"
 
 class C11Logger : public ILogger {
 private:
 	mutex		consoleLock;
 public:
 	void LogOutput(ostream&, string const&) override;
-
-
 };
 #endif

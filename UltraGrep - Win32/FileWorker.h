@@ -3,8 +3,8 @@
 #include <filesystem>
 using namespace std::tr2::sys;
 
-#include "IWorker.h"
-#include "FileVariables.h"
+#include "../UGLib/IWorker.h"
+#include "../UGLib/FileVariables.h"
 #include "W32Logger.h"
 
 //FileWorker - Worker Class that will parse a file to look for the given regex within the code file

@@ -3,11 +3,9 @@
 #include <algorithm>
 using namespace std;
 
-#include <Windows.h>
-
 #include "ThreadPool.h"
 #include "WorkerFactory.h"
-#include "CommandArgumentValidator.h"
+#include "../UGLib/CommandArgumentValidator.h"
 
 void OutputReport(vector<GrepResults> const& results) {
 	cout << "Grep Results: " << endl;
@@ -39,13 +37,18 @@ int main(int argc, char* argv[]) {
 	vector<GrepResults> results;
 
 	{
-		shared_ptr<IThreadPool> threadPool(new ThreadPool());
+		shared_ptr<IThreadPool<GrepResults>> threadPool(new ThreadPool<GrepResults>());
 		WorkerFactory factory(threadPool.get(), blueprints.fileVariables);
 
 		//Start up the thread with what we passed in!
 		factory.GenerateWorker(blueprints.initialThreadType, blueprints.initialFile);
 		results = threadPool->getResults();
 	}
+
+	//Don't like this, but to make the Threadpool more generic, this has to be added here
+	results.erase(remove_if(results.begin(), results.end(), [](GrepResults res) {
+		return res.getTotalMatches() == 0;
+	}), results.end());
 
 	sort(results.begin(), results.end());
 	OutputReport(results);

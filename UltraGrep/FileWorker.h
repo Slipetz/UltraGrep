@@ -3,9 +3,9 @@
 #include <filesystem>
 using namespace std::tr2::sys;
 
-#include "IWorker.h"
+#include "../UGLib/IWorker.h"
 #include "C11Logger.h"
-#include "FileVariables.h"
+#include "../UGLib/FileVariables.h"
 
 //FileWorker - Worker Class that will parse a file to look for the given regex within the code file
 //			 - Concrete version of an IWorker interface
